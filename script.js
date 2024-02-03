@@ -6,7 +6,7 @@ arr.forEach(button => {
     button.addEventListener('click',(e)=>{
         if(e.target.innerHTML == '='){
             try{
-                string = eval(string);
+                string = calculate(string);
                 input.value = string;
             }
             catch(err){
@@ -28,3 +28,8 @@ arr.forEach(button => {
         }
     })
 })
+function calculate(expression) {
+    const cleanExp = expression.replace(/[^-\d/*%+.]/g, '');
+    const calculateFunction = new Function('return ' + cleanExp);
+    return calculateFunction();
+}
